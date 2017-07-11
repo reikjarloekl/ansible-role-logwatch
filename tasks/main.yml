@@ -31,3 +31,11 @@
     mode=0755 owner=root group=root
   tags:
     - logwatch
+
+- name: Setup cron job for logwatch
+  cron:
+    name: "Run logwatch"
+    hour: 2
+    minute: 0
+    job: "/usr/sbin/logwatch"
+   
