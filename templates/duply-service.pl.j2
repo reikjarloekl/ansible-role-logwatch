@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+use strict;
+
+# Will hold pairs (profile name, result)
+my %result;
+my $line;
+my $current_profile;
+my $profile;
+my $r;
+
+# Go through the input.
+while (defined($line = <STDIN>)) {
+  # Specify number of errors per exception type.
+  if ($line =~ /Using profile '([^']*)'/i)
+  {
+    $current_profile = $1;
+  }
+  if ($line =~ /--- Finished state (\w+)/i)
+  {
+    if (!exists $result{$current_profile} || ($1 != "OK")) {
+      $result{$current_profile} = $1;
+    } 
+  }
+}
+
+print "\n\nDuply results\n";
+while (my ($profile, $r) = each %result) {
+  print $profile . ": " . $r . "\n";
+}

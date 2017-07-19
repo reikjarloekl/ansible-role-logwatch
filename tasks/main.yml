@@ -31,3 +31,18 @@
     mode=0755 owner=root group=root
   tags:
     - logwatch
+
+- name: Create script to parse duply log files
+  template: src=duply-service.pl.j2 dest=/usr/share/logwatch/scripts/services/duply owner=root group=root mode="u=rwx,g=r,o=r"
+  tags:
+    - logwatch
+
+- name: Create logfile definition for duply log files
+  template: src=duply-logfile.j2 dest=/etc/logwatch/conf/logfiles/duply.conf owner=root group=root mode="u=rw,g=r,o=r"
+  tags:
+    - logwatch
+
+- name: Create service configuration for duply log files
+  template: src=duply-service.conf.j2 dest=/etc/logwatch/conf/services/duply.conf owner=root group=root mode="u=rw,g=r,o=r"
+  tags:
+    - logwatch
