@@ -23,7 +23,6 @@ while (defined($line = <STDIN>)) {
   }
 }
 
-print "\n\nDuply results\n";
 while (my ($profile, $r) = each %result) {
-  print $profile . ": " . $r . "\n";
+  print "   " . $profile . ": " . $r . "\n";
 }
