@@ -7,10 +7,13 @@ my $line;
 my $current_profile;
 my $profile;
 my $r;
+my $latest_start = "UNKNOWN!";
 
 # Go through the input.
 while (defined($line = <STDIN>)) {
-  # Specify number of errors per exception type.
+  if ($line =~ /Start duply.*(\d{4}\-\d{2}\-\d{2})/i) {
+    $latest_start = $1;
+  }
   if ($line =~ /Using profile '([^']*)'/i)
   {
     $current_profile = $1;
@@ -23,6 +26,7 @@ while (defined($line = <STDIN>)) {
   }
 }
 
+print "   Last run: $latest_start\n";
 while (my ($profile, $r) = each %result) {
   print "   " . $profile . ": " . $r . "\n";
 }
